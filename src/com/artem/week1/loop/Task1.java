@@ -1,11 +1,11 @@
-package com.artem.task2;
+package com.artem.week1.loop;
 
 import java.util.Scanner;
 
 /**
  * Посчитать четные и нечетные цифры целого числа и вывести их на консоль.
  * Для решения написать 2 функции, которые будут принимать введенное целое число, а возвращать количество четных цифр (вторая функция - нечетных).
- *
+ * <p>
  * Например: если введено число 228910, то у него 4 четные цифры (2, 2, 8, 0) и 2 нечетные (9, 1).
  */
 public class Task1 {
@@ -18,34 +18,28 @@ public class Task1 {
         System.out.println(countOdd + " odd numbers in " + value);
     }
 
-    public static int countEven(int value) {
+    private static int countEven(int value) {
         int result = 0;
-            for (int currentValue = value; currentValue != 0; currentValue /= 10) {
-                if (currentValue % 10 == 1
-                        || currentValue % 10 == 3
-                        || currentValue % 10 == 5
-                        || currentValue % 10 == 7
-                        || currentValue % 10 == 9) {
-                    continue;
-                } else {
-                    result += 1;
-                }
+        int currentValue = value;
+        while (currentValue != 0) {
+            int lastDigit = currentValue % 10;
+            if (lastDigit % 2 == 0) {
+                result++;
+            }
+            currentValue /= 10;
         }
         return result;
     }
 
-    public static int countOdd(int value) {
+    private static int countOdd(int value) {
         int result = 0;
-        for (int currentValue = value; currentValue != 0; currentValue /= 10) {
-            if (currentValue % 10 == 0
-                    || currentValue % 10 == 2
-                    || currentValue % 10 == 4
-                    || currentValue % 10 == 6
-                    || currentValue % 10 == 8) {
-                continue;
-            } else {
-                result += 1;
+        int currentValue = value;
+        while (currentValue != 0) {
+            int lastDigit = currentValue % 10;
+            if (lastDigit % 2 != 0) {
+                result++;
             }
+            currentValue /= 10;
         }
         return result;
     }

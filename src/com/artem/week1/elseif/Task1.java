@@ -1,10 +1,9 @@
-package com.artem.task1;
+package com.artem.week1.elseif;
 
 /**
  * В переменной minutes лежит число от 0 до 59.
  * Написать функцию, которая принимает в качестве параметра значение переменной minutes и выводит на консоль
  * в какую четверть часа попадает это число (в первую, вторую, третью или четвертую).
- *
  * Протестировать функцию в main.
  */
 public class Task1 {
@@ -14,7 +13,7 @@ public class Task1 {
         printQuarter(minutes);
     }
 
-    public static void printQuarter(int minutes) {
+    private static void printQuarter(int minutes) {
         if (minutes >= 0 && minutes < 15) {
             System.out.println(minutes + " minutes is in the first quarter");
         } else if (minutes >= 15 && minutes < 30) {
