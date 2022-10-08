@@ -13,27 +13,24 @@ public class ArrayTask2 {
 
     public static void main(String[] args) {
         char[] values = {'a', '6', 'y', 'P', 'T', 'q', '9', '+'};
-        printElements(values);
+        int[] intArrays = convertToIntArray(values);
+        System.out.println(Arrays.toString(intArrays));
+        double average = calculateAverage(intArrays);
+        printElementsAboveAverage(intArrays, average);
     }
 
-    private static void printElements(char[] values) {
-        int[] convertedArray = convertToIntArray(values);
-        double average = calculateAverage(convertedArray);
-        int[] resultArray = new int[calculateSize(convertedArray, average)];
-        int currentIndex = 0;
+    private static void printElementsAboveAverage(int[] convertedArray, double average) {
         for (int i = 0; i < convertedArray.length; i++) {
             if (convertedArray[i] > average) {
-                resultArray[currentIndex++] = convertedArray[i];
+                System.out.println(convertedArray[i]);
             }
         }
-        System.out.println(Arrays.toString(resultArray));
     }
 
     private static int[] convertToIntArray(char[] values) {
         int[] resultArray = new int[values.length];
-        int currentIndex = 0;
         for (int i = 0; i < values.length; i++) {
-            resultArray[currentIndex++] = values[i];
+            resultArray[i] = values[i];
         }
         return resultArray;
     }
@@ -47,13 +44,4 @@ public class ArrayTask2 {
         return avarage;
     }
 
-    private static int calculateSize(int[] values, double avarage) {
-        int size = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] > avarage) {
-                size++;
-            }
-        }
-        return size;
-    }
 }

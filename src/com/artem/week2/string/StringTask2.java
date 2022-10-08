@@ -25,8 +25,7 @@ public class StringTask2 {
         int[] result = new int[countArraySize(value)];
         int counter = 0;
         for (int i = 0; i < value.length(); i++) {
-            boolean isDigit = Character.isDigit(value.charAt(i));
-            if (isDigit) {
+            if (Character.isDigit(value.charAt(i))) {
                 int currentInteger = Integer.parseInt(String.valueOf(value.charAt(i)));
                 result[counter++] = currentInteger;
             }
@@ -34,10 +33,10 @@ public class StringTask2 {
         return result;
     }
 
-    private static int countSum(int[] value) {
+    private static int countSum(int[] values) {
         int counter = 0;
-        for (int i = 0; i < value.length; i++) {
-            counter += value[i];
+        for (int value : values) {
+            counter += value;
         }
         return counter;
     }

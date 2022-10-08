@@ -5,9 +5,9 @@ public class House {
 
     private static final String CONSOLE_PRINT_TEMPLATE = "House number: is %d, number of floors: are %d.";
 
-    private int number;
+    private final int number;
 
-    private Floor[] floors;
+    private final Floor[] floors;
 
     public House(int number, Floor[] floors) {
         this.number = number;

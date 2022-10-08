@@ -8,68 +8,83 @@ import java.util.Arrays;
  * Если для какого-то из массивов не будет значений, то должен быть создан пустой массив.
  * Возвращает функция эти три массива в виде одного двумерного.
  * Пример:
- *                                     [-4, -18]
+ * [-4, -18]
  * [-4, 0, 1, 9, 0, -18, 3] -> [0, 0]
- *                                     [1, 9, 3]
+ * [1, 9, 3]
  */
 public class ArrayTask3 {
 
+    private static final String POSITIVE = "Positive";
+    private static final String NEGATIVE = "Negative";
+    private static final String ZERO = "Zero";
+
     public static void main(String[] args) {
         int[] values = {-4, 0, 1, 9, 0, -18, 3};
-        int[][] convertedArray = convertArray(values);
+        int[][] convertedArray = split(values);
         printArray(convertedArray);
     }
 
     private static void printArray(int[][] values) {
-        for (int i = 0; i < values.length; i++) {
-            int[] ints = values[i];
+        for (int[] ints : values) {
             System.out.print(Arrays.toString(ints));
             System.out.println();
         }
     }
 
-    private static int[][] convertArray(int[] values) {
-        int[][] resultArray = new int[3][];
-        resultArray[0] = new int[calculateNegative(values)];
-        resultArray[1] = new int[calculateZero(values)];
-        resultArray[2] = new int[calculatePositive(values)];
-        for (int i = 0, index1 = 0, index2 = 0, index3 = 0; i < values.length; i++) {
-            if (values[i] < 0) {
-                resultArray[0][index1++] = values[i];
-            } else if (values[i] == 0) {
-                resultArray[1][index2++] = values[i];
-            } else if (values[i] > 0) {
-                resultArray[2][index3++] = values[i];
+    private static int[][] split(int[] values) {
+        return new int[][]{
+                extractNegativeNumbers(values),
+                extractZeroNumbers(values),
+                extractPositiveNumbers(values)
+        };
+    }
+
+    private static int[] extractNegativeNumbers(int[] values) {
+        int[] resultArray = new int[calculateElements(values, NEGATIVE)];
+        int currentIndex = 0;
+        for (int value : values) {
+            if (value < 0) {
+                resultArray[currentIndex++] = value;
             }
         }
         return resultArray;
     }
 
-    private static int calculatePositive(int[] values) {
-        int count = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] > 0) {
-                count++;
+    private static int[] extractZeroNumbers(int[] values) {
+        int[] resultArray = new int[calculateElements(values, ZERO)];
+        int currentIndex = 0;
+        for (int value : values) {
+            if (value == 0) {
+                resultArray[currentIndex++] = value;
             }
         }
-        return count;
+        return resultArray;
     }
 
-    private static int calculateNegative(int[] values) {
-        int count = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] < 0) {
-                count++;
+    private static int[] extractPositiveNumbers(int[] values) {
+        int[] resultArray = new int[calculateElements(values, POSITIVE)];
+        int currentIndex = 0;
+        for (int value : values) {
+            if (value > 0) {
+                resultArray[currentIndex++] = value;
             }
         }
-        return count;
+        return resultArray;
     }
 
-    private static int calculateZero(int[] values) {
+    private static int calculateElements(int[] values, String condition) {
         int count = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] == 0) {
-                count++;
+        for (int value : values) {
+            switch (condition) {
+                case POSITIVE -> {
+                    if (value > 0) count++;
+                }
+                case NEGATIVE -> {
+                    if (value < 0) count++;
+                }
+                case ZERO -> {
+                    if (value == 0) count++;
+                }
             }
         }
         return count;

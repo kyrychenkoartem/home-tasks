@@ -14,15 +14,14 @@ public class StringTask1 {
 
     public static void main(String[] args) {
         String value = "abc Cpddd Dio OsfWw";
-        StringBuilder result = toUpperCaseWithoutRepeatable(value);
+        StringBuilder result = convertToUpperCaseWithoutRepeatable(value);
         System.out.println(result);
     }
 
-    private static StringBuilder toUpperCaseWithoutRepeatable(String value) {
+    private static StringBuilder convertToUpperCaseWithoutRepeatable(String value) {
         String withoutSpace = value.replace(SPACE, EMPTY).toUpperCase();
         char previousChar = withoutSpace.charAt(0);
-        StringBuilder result = new StringBuilder();
-        result.append(previousChar);
+        var result = new StringBuilder().append(previousChar);
         for (int i = 1; i < withoutSpace.length() - 1; i++) {
             char nextChar = withoutSpace.charAt(i);
             if (previousChar != nextChar) {

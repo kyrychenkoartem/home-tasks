@@ -24,16 +24,14 @@ public class ArrayTask1 {
                 resultArray[currentIndex++] = values[i];
             }
         }
-        return multipleElements(resultArray);
+        return multiplyByArrayLength(resultArray);
     }
 
-    private static int[] multipleElements(int[] values) {
-        int multiplier = values.length;
-        int[] resultArray = values;
-        for (int i = 0; i < resultArray.length; i++) {
-            resultArray[i] *= multiplier;
+    private static int[] multiplyByArrayLength(int[] values) {
+        for (int i = 0; i < values.length; i++) {
+            values[i] = values[i] * values.length;
         }
-        return resultArray;
+        return values;
     }
 
     private static int calculateSize(int[] values) {
