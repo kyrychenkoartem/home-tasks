@@ -17,7 +17,7 @@ public class ArrayTask1 {
     }
 
     private static int[] deleteNegativesAndMultiple(int[] values) {
-        int[] resultArray = new int[calculateSize(values)];
+        int[] resultArray = new int[getSizeOfNonNegativeArray(values)];
         int currentIndex = 0;
         for (int i = 0; i < values.length; i++) {
             if (values[i] >= 0) {
@@ -34,7 +34,7 @@ public class ArrayTask1 {
         return values;
     }
 
-    private static int calculateSize(int[] values) {
+    private static int getSizeOfNonNegativeArray(int[] values) {
         int count = 0;
         for (int i = 0; i < values.length; i++) {
             if (values[i] >= 0) {
