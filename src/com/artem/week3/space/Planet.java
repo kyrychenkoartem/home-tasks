@@ -6,27 +6,9 @@ public class Planet extends CelestialBody {
 
     private final Satellite[] satellites;
 
-    private final long mass;
-
-    private final String name;
-
-    private final long radius;
-
     public Planet(Satellite[] satellites, long mass, String name, long radius) {
+        super(mass, name, radius);
         this.satellites = satellites;
-        this.mass = mass;
-        this.name = name;
-        this.radius = radius;
-    }
-
-    @Override
-    public String toString() {
-        return "Planet{" +
-                "satellites=" + Arrays.toString(satellites) +
-                ", mass=" + mass +
-                ", name='" + name + '\'' +
-                ", radius=" + radius +
-                '}';
     }
 
     public Satellite[] getSatellites() {
@@ -46,5 +28,15 @@ public class Planet extends CelestialBody {
     @Override
     public long getRadius() {
         return radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "satellites=" + Arrays.toString(satellites) +
+                ", mass=" + mass +
+                ", name='" + name + '\'' +
+                ", radius=" + radius +
+                '}';
     }
 }

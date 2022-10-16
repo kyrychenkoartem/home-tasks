@@ -2,7 +2,7 @@ package com.artem.week3.space;
 
 public final class SpaceUtils {
 
-    private SpaceUtils(){
+    private SpaceUtils() {
     }
 
     public static double getGravityPower(CelestialBody object1, CelestialBody object2) {

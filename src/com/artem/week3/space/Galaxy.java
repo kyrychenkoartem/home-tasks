@@ -2,22 +2,15 @@ package com.artem.week3.space;
 
 import java.util.Arrays;
 
-public class Galaxy extends CelestialBody {
+public class Galaxy {
 
     private final GalaxyShapeType shapeType;
-
     private final Comet[] comets;
-
     private final MinorPlanet[] minorPlanets;
-
     private final Planet[] planets;
-
     private final Star[] stars;
-
     private final long mass;
-
     private final String name;
-
     private final long radius;
 
     public Galaxy(GalaxyShapeType shapeType, Comet[] comets, MinorPlanet[] minorPlanets,
@@ -44,20 +37,5 @@ public class Galaxy extends CelestialBody {
                 ", name='" + name + '\'' +
                 ", radius=" + radius +
                 '}';
-    }
-
-    @Override
-    public long getMass() {
-        return mass;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public long getRadius() {
-        return radius;
     }
 }

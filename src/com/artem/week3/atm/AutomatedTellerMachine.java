@@ -12,17 +12,12 @@ public class AutomatedTellerMachine {
             "Available banknotes: %d $CAD - %d, %d $CAD - %d, %d $CAD - %d.";
 
     private static final int TWENTY_NOMINAL = 20;
-
     private static final int FIFTY_NOMINAL = 50;
-
     private static final int HUNDRED_NOMINAL = 100;
 
     private int numberOfTwenties;
-
     private int numberOfFifty;
-
     private int numberOfHundred;
-
     private int balance;
 
     public AutomatedTellerMachine(int numberOfTwenties, int numberOfFifty, int numberOfHundred) {
@@ -92,6 +87,12 @@ public class AutomatedTellerMachine {
         return cashAmount <= 0;
     }
 
+    public void printBalance() {
+        System.out.println("On your account: " + balance + " $CAD");
+        System.out.printf(AVAILABLE_BANKNOTES, HUNDRED_NOMINAL, numberOfHundred, FIFTY_NOMINAL, numberOfFifty, TWENTY_NOMINAL, numberOfTwenties);
+        System.out.println();
+    }
+
     private void printWithdrawalWithOneTypeOfNotes(int cashAmount, int countOfNotes, int notes) {
         System.out.println("Successful withdrawal - " + cashAmount + " $CAD");
         System.out.printf(WITHDRAWAL_ONY_TYPE_OF_NOTES, countOfNotes, notes);
@@ -108,12 +109,6 @@ public class AutomatedTellerMachine {
                                                       int notes2, int countOfNotes3, int notes3) {
         System.out.println("Successful withdrawal - " + cashAmount + " $CAD");
         System.out.printf(WITHDRAWAL_THREE_TYPES_OF_NOTES, countOfNotes1, notes1, countOfNotes2, notes2, countOfNotes3, notes3);
-        System.out.println();
-    }
-
-    public void printBalance() {
-        System.out.println("On your account: " + balance + " $CAD");
-        System.out.printf(AVAILABLE_BANKNOTES, HUNDRED_NOMINAL, numberOfHundred, FIFTY_NOMINAL, numberOfFifty, TWENTY_NOMINAL, numberOfTwenties);
         System.out.println();
     }
 

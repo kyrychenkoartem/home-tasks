@@ -2,25 +2,8 @@ package com.artem.week3.space;
 
 public class Satellite extends CelestialBody {
 
-    private final long mass;
-
-    private final String name;
-
-    private final long radius;
-
     public Satellite(long mass, String name, long radius) {
-        this.mass = mass;
-        this.name = name;
-        this.radius = radius;
-    }
-
-    @Override
-    public String toString() {
-        return "Satellite{" +
-                "mass=" + mass +
-                ", name='" + name + '\'' +
-                ", radius=" + radius +
-                '}';
+        super(mass, name, radius);
     }
 
     public long getMass() {
@@ -34,5 +17,14 @@ public class Satellite extends CelestialBody {
     @Override
     public long getRadius() {
         return radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Satellite{" +
+                "mass=" + mass +
+                ", name='" + name + '\'' +
+                ", radius=" + radius +
+                '}';
     }
 }

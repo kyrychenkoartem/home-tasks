@@ -5,27 +5,9 @@ public class Comet extends CelestialBody implements WithLuminousTail {
 
     private final int gases;
 
-    private final long mass;
-
-    private final String name;
-
-    private final long radius;
-
     public Comet(int gases, long mass, String name, long radius) {
+        super(mass, name, radius);
         this.gases = gases;
-        this.mass = mass;
-        this.name = name;
-        this.radius = radius;
-    }
-
-    @Override
-    public String toString() {
-        return "Comet{" +
-                "gases=" + gases +
-                ", mass=" + mass +
-                ", name='" + name + '\'' +
-                ", radius=" + radius +
-                '}';
     }
 
     @Override
@@ -46,5 +28,15 @@ public class Comet extends CelestialBody implements WithLuminousTail {
     @Override
     public int gasVariability() {
         return gases;
+    }
+
+    @Override
+    public String toString() {
+        return "Comet{" +
+                "gases=" + gases +
+                ", mass=" + mass +
+                ", name='" + name + '\'' +
+                ", radius=" + radius +
+                '}';
     }
 }
