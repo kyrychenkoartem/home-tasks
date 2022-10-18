@@ -6,6 +6,9 @@ import java.util.List;
 
 public class ChatRunner {
 
+    public ChatRunner() {
+    }
+
     public static void main(String[] args) {
         List<Chat> chatList = new ArrayList<>();
         chatList.add(new Chat("Slack", Arrays.asList(
@@ -28,8 +31,11 @@ public class ChatRunner {
         ));
         System.out.println(chatList);
         List<User> users = ChatUtils.convertToListUsers(chatList);
-        System.out.println(users);
-        double averageAge = ChatUtils.countAverageAgeOfRemainingUsers(users, chatList);
+        List<User> filteredUsersByAge = ChatUtils.filterByAge(users);
+        System.out.println(filteredUsersByAge);
+        double averageAge = ChatUtils.countAverageAgeOfRemainingUsers(filteredUsersByAge, chatList);
+        double averageUsersAge = ChatUtils.calculateAverageUsersAge(filteredUsersByAge);
         System.out.println("Average age of remaining users is: " + averageAge + " years");
+        System.out.println("Average age of remaining users is: " + averageUsersAge + " years");
     }
 }

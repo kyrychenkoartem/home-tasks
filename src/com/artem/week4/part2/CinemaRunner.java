@@ -28,10 +28,10 @@ public class CinemaRunner {
         cinema.addMovie(movie9);
         cinema.addMovie(movie10);
         cinema.addMovie(movie11);
-        System.out.println(cinema.getMovieByYear(1234));
-        System.out.println(cinema.getMovieByYear(123));
-        System.out.println(cinema.getMovieByYearAndMonth(1234, 4));
+        System.out.println(cinema.getAllMoviesByYear(2012));
+        System.out.println(cinema.getAllMoviesByYear(2010));
+        System.out.println(cinema.getMoviesByYearAndMonth(2012, 4));
         System.out.println(cinema.getMovieByGenre(Genre.COMEDY));
-        System.out.println(cinema.getTopTenByRatingInDescending());
+        System.out.println(cinema.getTopMovies());
     }
 }

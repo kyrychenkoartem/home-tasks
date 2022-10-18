@@ -1,52 +1,43 @@
 package com.artem.week4.part2;
 
-import com.artem.week4.part1.task2.comparator.MovieRatingComparator;
-import java.util.*;
+import com.artem.week4.part2.comparator.MovieRatingComparator;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class Cinema {
 
-    public static final int TOP_TEN = 10;
+    public static final int TOP_CAPACITY = 10;
 
-    private final Map<Integer, List<Movie>> movies = new LinkedHashMap<>();
+    private final Map<Integer, Set<Movie>> movies = new LinkedHashMap<>();
 
     public void addMovie(Movie movie) {
-        int publicationYear = movie.getPublicationYear();
-        List<Movie> movieList = movies.getOrDefault(publicationYear, new LinkedList<>());
-        if (!movieList.contains(movie)) {
-            movieList.add(movie);
-        }
-        movies.put(publicationYear, movieList);
+        Set<Movie> existMovies = getAllMoviesByYear(movie.publicationYear());
+        existMovies.add(movie);
+        movies.put(movie.publicationYear(), existMovies);
     }
 
-    public List<Movie> getMovieByYear(int year) {
-        List<Movie> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Movie>> entry : movies.entrySet()) {
-            if (entry.getKey() == year) {
-                result.addAll(entry.getValue());
-            }
-        }
-        return result;
+    public Set<Movie> getAllMoviesByYear(int year) {
+        return movies.getOrDefault(year, new LinkedHashSet<>());
     }
 
-    public List<Movie> getMovieByYearAndMonth(int year, int month) {
-        List<Movie> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Movie>> entry : movies.entrySet()) {
-            if (entry.getKey() == year) {
-                for (Movie movie : entry.getValue()) {
-                    if (movie.getPublicationMonth() == month) {
-                        result.add(movie);
-                    }
-                }
-            }
-        }
-        return result;
+    public Set<Movie> getMoviesByYearAndMonth(int year, int month) {
+        Set<Movie> allMoviesByYear = getAllMoviesByYear(year);
+        return allMoviesByYear.stream()
+                .filter(movie -> movie.publicationMonth() == month)
+                .collect(Collectors.toSet());
     }
 
-    public List<Movie> getMovieByGenre(Genre genre) {
-        List<Movie> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Movie>> entry : movies.entrySet()) {
+    public Set<Movie> getMovieByGenre(Genre genre) {
+        Set<Movie> result = new LinkedHashSet<>();
+        for (Map.Entry<Integer, Set<Movie>> entry : movies.entrySet()) {
             for (Movie movie : entry.getValue()) {
-                if (movie.getGenre() == genre) {
+                if (movie.genre() == genre) {
                     result.add(movie);
                 }
             }
@@ -54,21 +45,15 @@ public class Cinema {
         return result;
     }
 
-    public List<Movie> getTopTenByRatingInDescending() {
-        int moviesCount = 0;
-        List<Movie> allMovies = new ArrayList<>();
-        List<Movie> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Movie>> entry : movies.entrySet()) {
-            allMovies.addAll(entry.getValue());
+    public List<Movie> getTopMovies() {
+        var topMovies = new ArrayList<Movie>();
+        for (Set<Movie> moviesByYear : movies.values()) {
+            topMovies.addAll(moviesByYear);
         }
-        allMovies.sort(new MovieRatingComparator());
-        for (Movie movie : allMovies) {
-            if (moviesCount < TOP_TEN) {
-                result.add(movie);
-                moviesCount++;
-            }
-        }
-        return result;
+        topMovies.sort(new MovieRatingComparator());
+
+        var topMoviesSize = Math.min(TOP_CAPACITY, topMovies.size());
+        return topMovies.subList(0, topMoviesSize);
     }
 
     @Override
