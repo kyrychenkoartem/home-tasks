@@ -1,15 +1,6 @@
 package com.artem.week5;
 
-import static java.util.Comparator.comparing;
 import java.util.List;
-import java.util.Map;
-import java.util.OptionalDouble;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.averagingDouble;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
 
 public class StudentRunner {
 
@@ -29,31 +20,8 @@ public class StudentRunner {
                 new Student("Owen", "Lincoln", 6, List.of(4, 2, 3, 6, 1, 5, 2, 3))
         );
 
-        Map<Integer, Double> filteredMap = personList.stream()
-                .filter(student -> student.marks().size() > 3)
-                .collect(groupingBy(Student::courseNumber,
-                        mapping(student -> student.marks().stream().mapToInt(Integer::intValue).average(),
-                                averagingDouble(OptionalDouble::getAsDouble))));
-        System.out.println(filteredMap);
-
-        Map<Integer, List<Student.StudentWithFullNameOnly>> sortedMap = personList.stream()
-                .sorted(comparing(Student::firstName).thenComparing(Student::lastName))
-                .collect(groupingBy(Student::courseNumber,
-                        mapping(student -> new Student.StudentWithFullNameOnly(student.firstName(), student.lastName()), toList())));
-        System.out.println(sortedMap);
-
-        Map<Integer, Student.Statistics> sortedMap2 = personList.stream()
-                .sorted(comparing(Student::firstName).thenComparing(Student::lastName))
-                .collect(groupingBy(Student::courseNumber,
-                        collectingAndThen(toList(), studentList -> {
-                            List<Student.StudentWithFullNameOnly> studentSortedList = studentList.stream()
-                                    .map(student -> new Student.StudentWithFullNameOnly(student.firstName(), student.lastName()))
-                                    .collect(toList());
-                            Double averageMark = studentList.stream()
-                                    .map(student -> student.marks().stream().mapToInt(Integer::intValue).average())
-                                    .collect(averagingDouble(OptionalDouble::getAsDouble));
-                            return new Student.Statistics(studentSortedList, averageMark);
-                        })));
-        System.out.println(sortedMap2);
+        System.out.println(Student.filteredMap(personList));
+        System.out.println(Student.sortedMap(personList));
+        System.out.println(Student.sortedMap2(personList));
     }
 }
