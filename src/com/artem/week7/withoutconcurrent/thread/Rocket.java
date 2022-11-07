@@ -22,16 +22,12 @@ public class Rocket extends Thread {
     @Override
     public void run() {
         try {
-            while (!mage.isCrystalEnough()) {
+            while (!Mage.hasWinner()) {
                 List<CrystalType> crystals = gatherCrystalsFromPlanet();
                 mage.addCrystals(crystals);
                 mage.getCrystals().values().forEach(System.out::println);
                 if (mage.isCrystalEnough()) {
                     System.out.println(mage.getName() + " mage - Won!!!!");
-                    synchronized (day.getLock()) {
-                        day.setEnough(true);
-                    }
-                    break;
                 }
                 waitNextDay();
             }

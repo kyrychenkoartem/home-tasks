@@ -1,6 +1,7 @@
 package com.artem.week7.withoutconcurrent.thread;
 
 import com.artem.week7.withoutconcurrent.model.CrystalType;
+import com.artem.week7.withoutconcurrent.model.Mage;
 import com.artem.week7.withoutconcurrent.model.Planet;
 import com.artem.week7.withoutconcurrent.util.RandomUtil;
 
@@ -17,12 +18,8 @@ public class CrystalFactory extends Thread {
     @Override
     public void run() {
         try {
-            while (!day.isEnough()) {
+            while (!Mage.hasWinner()) {
                 growNewCrystals();
-                if (day.isEnough()) {
-                    day.setEnough(true);
-                    break;
-                }
                 waitNextDay();
             }
         } catch (InterruptedException e) {
