@@ -1,15 +1,16 @@
 package com.artem.week7.withoutconcurrent.model;
 
-import java.util.EnumMap;
+import com.artem.week7.withoutconcurrent.util.ThreadUtil;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class Mage {
 
     private static final int NECESSARY_AMOUNT_OF_CRYSTALS = 500;
-    private final Map<CrystalType, Integer> crystals = new EnumMap<>(CrystalType.class);
+    private final ConcurrentMap<CrystalType, Integer> crystals = new ConcurrentHashMap<>();
     private final String name;
-    private static boolean IS_WINNER = false;
 
     public Mage(String name) {
         this.name = name;
@@ -19,18 +20,12 @@ public class Mage {
 
     public void addCrystals(List<CrystalType> crystalList) {
         crystalList.forEach(crystal -> crystals.merge(crystal, 1, Integer::sum));
-        if (isCrystalEnough()) {
-            IS_WINNER = true;
-        }
+        isInterruptNecessary();
     }
 
     public boolean isCrystalEnough() {
         return crystals.get(CrystalType.RED) >= NECESSARY_AMOUNT_OF_CRYSTALS
                 && crystals.get(CrystalType.WHITE) >= NECESSARY_AMOUNT_OF_CRYSTALS;
-    }
-
-    public static boolean hasWinner() {
-        return IS_WINNER;
     }
 
     public String getName() {
@@ -39,5 +34,11 @@ public class Mage {
 
     public Map<CrystalType, Integer> getCrystals() {
         return crystals;
+    }
+
+    private void isInterruptNecessary() {
+        if (isCrystalEnough()) {
+            ThreadUtil.isInterruptNecessary.set(true);
+        }
     }
 }

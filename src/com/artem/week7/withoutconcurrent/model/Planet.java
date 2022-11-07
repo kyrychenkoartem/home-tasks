@@ -1,13 +1,13 @@
 package com.artem.week7.withoutconcurrent.model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Planet {
 
     private final Object lock = new Object();
-    private final List<CrystalType> crystals = new LinkedList<>();
+    private final CopyOnWriteArrayList<CrystalType> crystals = new CopyOnWriteArrayList<>();
 
     public void add(CrystalType crystal) {
         crystals.add(crystal);

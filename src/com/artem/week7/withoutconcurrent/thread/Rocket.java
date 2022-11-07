@@ -4,6 +4,7 @@ import com.artem.week7.withoutconcurrent.model.CrystalType;
 import com.artem.week7.withoutconcurrent.model.Mage;
 import com.artem.week7.withoutconcurrent.model.Planet;
 import com.artem.week7.withoutconcurrent.util.RandomUtil;
+import com.artem.week7.withoutconcurrent.util.ThreadUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Rocket extends Thread {
     @Override
     public void run() {
         try {
-            while (!Mage.hasWinner()) {
+            while (!ThreadUtil.isInterruptNecessary.get()) {
                 List<CrystalType> crystals = gatherCrystalsFromPlanet();
                 mage.addCrystals(crystals);
                 mage.getCrystals().values().forEach(System.out::println);

@@ -1,7 +1,7 @@
 package com.artem.week7.withoutconcurrent.thread;
 
-import com.artem.week7.withoutconcurrent.model.Mage;
 import com.artem.week7.withoutconcurrent.util.RandomUtil;
+import com.artem.week7.withoutconcurrent.util.ThreadUtil;
 
 public class Day extends Thread {
 
@@ -9,7 +9,7 @@ public class Day extends Thread {
 
     @Override
     public void run() {
-        while (!Mage.hasWinner()) {
+        while (!ThreadUtil.isInterruptNecessary.get()) {
             synchronized (lock) {
                 try {
                     System.out.println("----------------\nDay started, new crystals have grown");
@@ -28,5 +28,4 @@ public class Day extends Thread {
     public Object getLock() {
         return lock;
     }
-
 }

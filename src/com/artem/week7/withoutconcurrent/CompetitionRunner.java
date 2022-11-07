@@ -18,12 +18,6 @@ public class CompetitionRunner {
 
         ThreadUtil.startThreads(day, crystalFactory, airRocket, fireRocket);
         ThreadUtil.joinThreads(day, crystalFactory, airRocket, fireRocket);
-        viewStatistic(airRocket.getMage(), fireRocket.getMage());
-    }
-
-    private static void viewStatistic(Mage firstMage, Mage secondMage) {
-        System.out.println("----------------");
-        System.out.println(firstMage.getName() + " " + firstMage.getCrystals());
-        System.out.println(secondMage.getName() + " " + secondMage.getCrystals());
+        ThreadUtil.viewStatistic(airRocket.getMage(), fireRocket.getMage());
     }
 }
