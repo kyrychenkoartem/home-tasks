@@ -9,8 +9,8 @@ public class Day extends Thread {
 
     @Override
     public void run() {
-        while (!ThreadUtil.isInterruptNecessary.get()) {
-            synchronized (lock) {
+        synchronized (lock) {
+            while (!ThreadUtil.isInterruptNecessary.get()) {
                 try {
                     System.out.println("----------------\nDay started, new crystals have grown");
                     lock.notifyAll();

@@ -8,7 +8,6 @@ public final class RandomUtil {
     public static final int WAITING_TIME = 50;
     private static final int MIN_CRYSTAL_COUNT = 2;
     private static final int MAX_CRYSTAL_COUNT = 5;
-    private static final int WHITE_CRYSTAL = 1;
 
     private static final Random RANDOM = new Random();
 
@@ -20,7 +19,7 @@ public final class RandomUtil {
     }
 
     public static CrystalType getNextCrystal() {
-        int numberOfCrystal = RANDOM.nextInt(WHITE_CRYSTAL + 1);
+        int numberOfCrystal = RANDOM.nextInt(CrystalType.CASHED_VALUES.size());
         return CrystalType.CASHED_VALUES.get(numberOfCrystal);
     }
 
